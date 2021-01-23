@@ -1,0 +1,26 @@
+- register_block:
+  - name: sample
+    byte_size:  256
+
+########################################################################
+  - register:
+    - name: register_0
+      offset_address: 0x00
+      bit_fields:
+      - { name: bit_field_0, bit_assignment: { lsb: 0, width: 4 }, type: counter, initial_value: 0 }
+      - { name: bit_field_1, bit_assignment: { lsb: 8, width: 4 }, type: counter, initial_value: 0, reference: register_2.bit_field_0 }
+
+########################################################################
+  - register:
+    - name: register_1
+      offset_address: 0x04
+      size: [2, 2]
+      bit_fields:
+      - { name: bit_field_0, bit_assignment: { lsb: 0, width: 4, sequence_size: 4, step: 8 }, type: counter, initial_value: 0 }
+
+########################################################################
+  - register:
+    - name: register_2
+      offset_address: 0x18
+      bit_fields:
+      - { name: bit_field_0, bit_assignment: { lsb: 0, width: 1 }, type: w1trg }
