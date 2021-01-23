@@ -8,7 +8,7 @@ module RgGen
 
     setup_plugin :'rggen-my-plugin' do |plugin|
       plugin.files [
-        'my_plugin/bit_field/type/foo'
+        'my_plugin/bit_field/type/counter'
       ]
     end
   end

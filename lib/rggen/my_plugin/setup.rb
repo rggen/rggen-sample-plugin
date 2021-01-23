@@ -3,5 +3,5 @@
 require File.expand_path('../my_plugin', __dir__)
 
 RgGen.register_plugin RgGen::MyPlugin do |builder|
-  builder.enable :bit_field, :type, [:foo]
+  builder.enable :bit_field, :type, [:counter]
 end
