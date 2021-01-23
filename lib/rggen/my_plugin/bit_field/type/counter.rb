@@ -42,5 +42,6 @@ RgGen.define_list_item_feature(:bit_field, :type, :counter) do
   end
 
   sv_ral do
+    access 'RW'
   end
 end
