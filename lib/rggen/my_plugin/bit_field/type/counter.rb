@@ -31,6 +31,14 @@ RgGen.define_list_item_feature(:bit_field, :type, :counter) do
     end
 
     main_code :bit_field, from_template: true
+
+    def clear_signal
+      if bit_field.reference?
+        reference_bit_field
+      else
+        clear[loop_variables]
+      end
+    end
   end
 
   sv_ral do

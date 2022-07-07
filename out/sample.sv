@@ -83,16 +83,16 @@ module sample
       rggen_bit_field_if #(4) bit_field_sub_if();
       `rggen_connect_bit_field_if(bit_field_if, bit_field_sub_if, 0, 4)
       rggen_bit_field_counter #(
-        .WIDTH          (),
-        .INITIAL_VALUE  ()
+        .WIDTH          (4),
+        .INITIAL_VALUE  (INITIAL_VALUE)
       ) u_bit_field (
-        .i_clk        (),
-        .i_rst_n      (),
-        .bit_field_if (),
-        .i_clear      (),
-        .i_up         (),
-        .i_down       (),
-        .o_count      ()
+        .i_clk        (i_clk),
+        .i_rst_n      (i_rst_n),
+        .bit_field_if (bit_field_sub_if),
+        .i_clear      (i_register_0_bit_field_0_clear),
+        .i_up         (i_register_0_bit_field_0_up),
+        .i_down       (i_register_0_bit_field_0_down),
+        .o_count      (o_register_0_bit_field_0_count)
       );
     end
     if (1) begin : g_bit_field_1
@@ -100,16 +100,16 @@ module sample
       rggen_bit_field_if #(4) bit_field_sub_if();
       `rggen_connect_bit_field_if(bit_field_if, bit_field_sub_if, 8, 4)
       rggen_bit_field_counter #(
-        .WIDTH          (),
-        .INITIAL_VALUE  ()
+        .WIDTH          (4),
+        .INITIAL_VALUE  (INITIAL_VALUE)
       ) u_bit_field (
-        .i_clk        (),
-        .i_rst_n      (),
-        .bit_field_if (),
-        .i_clear      (),
-        .i_up         (),
-        .i_down       (),
-        .o_count      ()
+        .i_clk        (i_clk),
+        .i_rst_n      (i_rst_n),
+        .bit_field_if (bit_field_sub_if),
+        .i_clear      (register_if[5].value[0+:1]),
+        .i_up         (i_register_0_bit_field_1_up),
+        .i_down       (i_register_0_bit_field_1_down),
+        .o_count      (o_register_0_bit_field_1_count)
       );
     end
   end endgenerate
@@ -141,16 +141,16 @@ module sample
             rggen_bit_field_if #(4) bit_field_sub_if();
             `rggen_connect_bit_field_if(bit_field_if, bit_field_sub_if, 0+8*k, 4)
             rggen_bit_field_counter #(
-              .WIDTH          (),
-              .INITIAL_VALUE  ()
+              .WIDTH          (4),
+              .INITIAL_VALUE  (INITIAL_VALUE)
             ) u_bit_field (
-              .i_clk        (),
-              .i_rst_n      (),
-              .bit_field_if (),
-              .i_clear      (),
-              .i_up         (),
-              .i_down       (),
-              .o_count      ()
+              .i_clk        (i_clk),
+              .i_rst_n      (i_rst_n),
+              .bit_field_if (bit_field_sub_if),
+              .i_clear      (i_register_1_bit_field_0_clear[i][j][k]),
+              .i_up         (i_register_1_bit_field_0_up[i][j][k]),
+              .i_down       (i_register_1_bit_field_0_down[i][j][k]),
+              .o_count      (o_register_1_bit_field_0_count[i][j][k])
             );
           end
         end

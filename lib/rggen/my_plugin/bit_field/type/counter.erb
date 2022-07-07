@@ -1,12 +1,12 @@
 rggen_bit_field_counter #(
-  .WIDTH          (),
-  .INITIAL_VALUE  ()
+  .WIDTH          (<%= width %>),
+  .INITIAL_VALUE  (<%= initial_value %>)
 ) u_bit_field (
-  .i_clk        (),
-  .i_rst_n      (),
-  .bit_field_if (),
-  .i_clear      (),
-  .i_up         (),
-  .i_down       (),
-  .o_count      ()
+  .i_clk        (<%= clock %>),
+  .i_rst_n      (<%= reset %>),
+  .bit_field_if (<%= bit_field_if %>),
+  .i_clear      (<%= clear_signal %>),
+  .i_up         (<%= up[loop_variables] %>),
+  .i_down       (<%= down[loop_variables] %>),
+  .o_count      (<%= count[loop_variables] %>)
 );
