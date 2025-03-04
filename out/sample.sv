@@ -12,7 +12,7 @@
   if (1) begin : __g_tie_off \
     genvar  __i; \
     for (__i = 0;__i < WIDTH;++__i) begin : g \
-      if (!(((VALID_BITS) >> __i) & 1'b1)) begin : g \
+      if ((((VALID_BITS) >> __i) % 2) == 0) begin : g \
         assign  RIF.read_data[__i]  = 1'b0; \
         assign  RIF.value[__i]      = 1'b0; \
       end \
@@ -26,7 +26,8 @@ module sample
   parameter bit PRE_DECODE = 0,
   parameter bit [ADDRESS_WIDTH-1:0] BASE_ADDRESS = '0,
   parameter bit ERROR_STATUS = 0,
-  parameter bit [31:0] DEFAULT_READ_DATA = '0
+  parameter bit [31:0] DEFAULT_READ_DATA = '0,
+  parameter bit INSERT_SLICER = 0
 )(
   input logic i_clk,
   input logic i_rst_n,
@@ -54,7 +55,8 @@ module sample
     .BASE_ADDRESS         (BASE_ADDRESS),
     .BYTE_SIZE            (256),
     .ERROR_STATUS         (ERROR_STATUS),
-    .DEFAULT_READ_DATA    (DEFAULT_READ_DATA)
+    .DEFAULT_READ_DATA    (DEFAULT_READ_DATA),
+    .INSERT_SLICER        (INSERT_SLICER)
   ) u_adapter (
     .i_clk        (i_clk),
     .i_rst_n      (i_rst_n),
@@ -71,7 +73,7 @@ module sample
       .OFFSET_ADDRESS (8'h00),
       .BUS_WIDTH      (32),
       .DATA_WIDTH     (32),
-      .REGISTER_INDEX (0)
+      .VALUE_WIDTH    (32)
     ) u_register (
       .i_clk        (i_clk),
       .i_rst_n      (i_rst_n),
@@ -124,10 +126,10 @@ module sample
           .READABLE       (1),
           .WRITABLE       (1),
           .ADDRESS_WIDTH  (8),
-          .OFFSET_ADDRESS (8'h04),
+          .OFFSET_ADDRESS (8'h04+8'(4*(2*i+j))),
           .BUS_WIDTH      (32),
           .DATA_WIDTH     (32),
-          .REGISTER_INDEX (2*i+j)
+          .VALUE_WIDTH    (32)
         ) u_register (
           .i_clk        (i_clk),
           .i_rst_n      (i_rst_n),
@@ -167,7 +169,7 @@ module sample
       .OFFSET_ADDRESS (8'h18),
       .BUS_WIDTH      (32),
       .DATA_WIDTH     (32),
-      .REGISTER_INDEX (0)
+      .VALUE_WIDTH    (32)
     ) u_register (
       .i_clk        (i_clk),
       .i_rst_n      (i_rst_n),
